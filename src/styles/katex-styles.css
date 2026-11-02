@@ -1,0 +1,28 @@
+/* KaTeX Styles */
+.katex { font-size: 1.1em !important; }
+.katex-display { margin: 1em 0; }
+.katex-display > .katex { display: inline-block; text-align: center; }
+.katex-display > .base { margin: 0.25em 0; }
+.katex-display .base + .mspace { margin-left: 0.16667em; }
+.katex-display .base + .mspace .thinspace { width: 0.16667em; }
+
+/* Adjust spacing for inline math */
+.katex .base + .mspace { margin-left: 0.16667em; }
+.katex .base + .mspace .thinspace { width: 0.16667em; }
+
+/* Ensure proper rendering of fractions */
+.katex .frac-line { border-bottom-style: solid; display: inline-block; width: 100%; }
+
+/* Make sure superscripts and subscripts don't affect line height */
+.katex .base { position: relative; }
+.katex .base, .katex .strut { display: inline-block; }
+.katex .textbf { font-weight: bold; }
+
+/* Fix for inline math alignment */
+.katex { text-rendering: auto; }
+.katex * { border-color: currentColor; }
+
+/* Style for mord mtight classes within specific container */
+.my-1 .mord.mtight {
+  font-weight: 800 !important;
+}

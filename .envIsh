@@ -1,0 +1,9 @@
+VITE_LOGIN_URL=https://ailevate.excelsoftcorp.com/#/login?data=
+VITE_SEND_EMAIL_URL=https://ai.excelsoftcorp.com/aiapps/AIProductApi/send-email
+VITE_API_BASE_URL=https://ailevate-poc.excelsoftcorp.com
+VITE_API_QUIZ_URL=https://ai.excelsoftcorp.com/QuizApi
+VITE_API_APPS_URL=https://ai.excelsoftcorp.com/aiapps/AIProductApi
+VITE_API_APPS_URL_AGENTS=https://ai.excelsoftcorp.com/aiapps/AIProductApi/agents
+VITE_ITEM_GEN_API_URL=https://ailevate-poc.excelsoftcorp.com/aiapps/ItemGenerator/QuizGenApi
+VITE_API_URL=https://ai.excelsoftcorp.com
+VITE_ITEM_GEN_API_URLs=https://ailevate-poc.excelsoftcorp.com/aiapps/ItemGenerator/QuizGenApi/item_gen

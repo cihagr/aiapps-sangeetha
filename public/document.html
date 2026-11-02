@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base System - Complete Documentation</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm 2cm;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c3e50; background: #ffffff; padding: 40px; max-width: 210mm; margin: 0 auto; }
+
+        .cover-page { text-align: center; padding: 100px 0; page-break-after: always; border-bottom: 4px solid #2c5f8d; }
+        .cover-page h1 { font-size: 42px; color: #1c67a8; margin-bottom: 20px; font-weight: 700; }
+        .cover-page .subtitle { font-size: 24px; color: #5a6c7d; margin-bottom: 60px; font-weight: 400; }
+        .cover-page .version { font-size: 18px; color: #7f8c8d; margin-top: 80px; }
+        .toc { page-break-after: always; padding: 40px 0; }
+        .toc h2 { font-size: 32px; color: #2c5f8d; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 3px solid #2c5f8d; }
+        .toc ul { list-style: none; padding-left: 0; }
+        .toc li { padding: 12px 0; font-size: 16px; border-bottom: 1px solid #e0e0e0; }
+        .toc li a { color: #2c3e50; text-decoration: none; display: flex; justify-content: space-between; }
+        .toc li a:hover { color: #2c5f8d; }
+        h1 { font-size: 36px; color: #2c5f8d; margin: 60px 0 30px 0; padding-bottom: 15px; border-bottom: 4px solid #2c5f8d; page-break-before: always; font-weight: 700; }
+        h2 { font-size: 28px; color: #34495e; margin: 40px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #3498db; font-weight: 600; }
+        h3 { font-size: 22px; color: #16a085; margin: 30px 0 15px 0; font-weight: 600; }
+        h4 { font-size: 18px; color: #e67e22; margin: 25px 0 12px 0; font-weight: 600; }
+        p { margin-bottom: 15px; text-align: justify; font-size: 14px; }
+        ul, ol { margin: 15px 0 15px 30px; }
+        li { margin-bottom: 8px; font-size: 14px; }
+        .info-box { background: #f8f9fa; border-left: 4px solid #2c5f8d; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .success-box { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .error-box { background: #f8d7da; border-left: 4px solid #dc3545; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        th { background: #2c5f8d; color: white; padding: 12px; text-align: left; font-weight: 600; }
+        td { padding: 12px; border: 1px solid #ddd; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; color: #c7254e; font-size: 13px; }
+        .code-block { background: #2c3e50; color: #ecf0f1; padding: 20px; border-radius: 5px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 13px; overflow-x: auto; }
+        .example { background: #e8f4f8; border: 1px solid #3498db; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .example-title { font-weight: 600; color: #2c5f8d; margin-bottom: 10px; }
+        strong { color: #2c3e50; font-weight: 600; }
+        .footer { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 2px solid #e0e0e0; color: #7f8c8d; font-size: 12px; }
+        @media print { body { padding: 0; } .no-print { display: none; } }
+        .btn-back { position: fixed; top: 20px; right: 20px; padding: 12px 24px; background: #cda132; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 1000; }
+        .btn-back:hover { background: #1e4d73; }
+        .btn-download { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; background: #cda132; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 1000; }
+        .btn-download:hover { background: #1e4d73; }
+
+        .manual-toggle { position: fixed; top: 20px; right: 20px; display: inline-flex; background: #f0f2f5; border: 1px solid #d0d7de; border-radius: 10px; overflow: hidden; z-index: 1000; }
+        .manual-toggle button { appearance: none; border: none; padding: 10px 14px; cursor: pointer; background: transparent; color: #2c3e50; font-weight: 600; }
+        .manual-toggle button.active { background: #2c5f8d; color: #ffffff; }
+
+        body.view-doc #flowchart-view { display: none; }
+        body.view-flow #documentation-view { display: none; }
+
+        body.view-flow { max-width: none; margin: 0; padding: 20px; background: #f5f7fa; }
+
+        #flowchart-view .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        #flowchart-view h1 {
+            color: #2c5f8d;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #2c5f8d;
+        }
+        #flowchart-view .flowchart-container {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        #flowchart-view .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #2c5f8d;
+        }
+        #flowchart-view .legend-item { display: flex; align-items: center; margin-right: 20px; }
+        #flowchart-view .legend-color { width: 20px; height: 20px; margin-right: 10px; border-radius: 4px; }
+        #flowchart-view .section {
+            margin: 40px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background: #f0f7ff;
+            border-left: 4px solid #3498db;
+        }
+        #flowchart-view .section h2 { color: #2c5f8d; margin-top: 0; }
+        #flowchart-view .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        @media print {
+            body.view-flow { background: #ffffff; padding: 0; }
+            #flowchart-view .container { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <button class="btn-download no-print" onclick="window.print()">Download PDF</button>
+
+    <div class="manual-toggle no-print" role="tablist" aria-label="Manual view selector">
+        <button id="toggle-doc" class="active" type="button">Documentation</button>
+        <button id="toggle-flow" type="button">Flowchart</button>
+    </div>
+
+    <div id="documentation-view">
+    
+    <div class="cover-page">
+        <h1>Knowledge Base System</h1>
+        <div class="subtitle">Complete Documentation</div>
+        <div class="version">Version 2.0</div>
+        <div class="version">2026</div>
+    </div>
+    
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#section1"><span>1. System Overview</span><span>1</span></a></li>
+            <li><a href="#section2"><span>2. User Authentication & Auto-Binding</span><span>2</span></a></li>
+            <li><a href="#section3"><span>3. Dashboard Overview</span><span>3</span></a></li>
+            <li><a href="#section4"><span>4. Book Level Knowledge Base Creation</span><span>5</span></a></li>
+            <li><a href="#section5"><span>5. Processing Settings</span><span>8</span></a></li>
+            <li><a href="#section6"><span>6. Study LO Creation</span><span>15</span></a></li>
+            <li><a href="#section7"><span>7. Study Level Knowledge Base Creation</span><span>17</span></a></li>
+            <li><a href="#section8"><span>8. Knowledge Base Management</span><span>19</span></a></li>
+            <li><a href="#section9"><span>9. Guidelines Management</span><span>21</span></a></li>
+            <li><a href="#section10"><span>10. Best Practices</span><span>23</span></a></li>
+            <li><a href="#section11"><span>11. Troubleshooting</span><span>25</span></a></li>
+        </ul>
+    </div>
+    
+    <h1 id="section1">1. System Overview</h1>
+    
+    <p>The Knowledge Base System is an advanced document management and retrieval platform that leverages artificial intelligence to provide accurate, contextual answers from your document repositories. This system combines state-of-the-art natural language processing techniques with vector embeddings to create an intelligent question-answering solution specifically designed for educational content management.</p>
+    
+    <h2>Key Features</h2>
+    
+    <ul>
+        <li><strong>User-Based Access Control:</strong> Automatic binding of customer and organization based on login credentials</li>
+        <li><strong>Multi-Level Knowledge Bases:</strong> Support for both Book Level and Study Level knowledge organization</li>
+        <li><strong>Intelligent Document Processing:</strong> Automatically processes and indexes documents from multiple formats</li>
+        <li><strong>Study LO Management:</strong> Specialized system for managing learning objectives in CSV format</li>
+        <li><strong>Agent Configuration:</strong> Configurable agents for retrieval, compliance, match generation, and assessment</li>
+        <li><strong>Advanced Retrieval:</strong> Multiple retrieval strategies including MMR, Similarity, and Hybrid approaches</li>
+        <li><strong>Customizable Settings:</strong> Fine-tune system parameters to match your specific requirements</li>
+    </ul>
+    
+    <h2>System Architecture</h2>
+    
+    <p>The system operates through a multi-stage pipeline designed for educational content management:</p>
+    
+    <ol>
+        <li><strong>User Authentication:</strong> Automatic binding of user to customer and organization</li>
+        <li><strong>Document Ingestion:</strong> Upload and validate documents in supported formats</li>
+        <li><strong>Knowledge Base Creation:</strong> Create Book Level and Study Level knowledge bases</li>
+        <li><strong>Study LO Management:</strong> Upload and manage learning objectives</li>
+        <li><strong>Preprocessing:</strong> Clean and structure document content</li>
+        <li><strong>Chunking:</strong> Split documents into optimally-sized segments</li>
+        <li><strong>Embedding Generation:</strong> Convert text chunks into vector representations</li>
+        <li><strong>Vector Storage:</strong> Store embeddings in high-performance databases</li>
+        <li><strong>Query Processing:</strong> Enhance and execute user queries</li>
+        <li><strong>Response Generation:</strong> Generate accurate answers using retrieved context</li>
+    </ol>
+    
+    <h1 id="section2">2. User Authentication & Auto-Binding</h1>
+    
+    <h2>Purpose</h2>
+    
+    <p>The authentication system automatically binds users to their respective customer and organization based on login credentials. This ensures proper data isolation, access control, and organizational hierarchy within the knowledge base system.</p>
+    
+    <h2>How It Works</h2>
+    
+    <ol>
+        <li>User logs in with username and password credentials</li>
+        <li>System validates credentials against the central database</li>
+        <li>Upon successful authentication, the system automatically retrieves and binds:
+            <ul>
+                <li>Customer information associated with the user</li>
+                <li>Organization code linked to the user's account</li>
+            </ul>
+        </li>
+        <li>User is redirected to the dashboard with pre-bound customer and organization</li>
+    </ol>
+    
+    <h2>Dashboard Interface Components</h2>
+    
+    <h3>Select Customer Card</h3>
+    <p>Displays the automatically bound customer information. Users cannot select other customers as this is determined by their login credentials.</p>
+    
+    <h3>Select Organization Card</h3>
+    <p>Shows the automatically bound organization code. Users cannot select other organizations as this is determined by their account settings.</p>
+    
+    <h3>Apps Details Card</h3>
+    <p>This is the only configurable component where users can select application details from a dropdown menu. The available apps are filtered based on the user's bound organization.</p>
+    
+    <h2>Security and Access Control</h2>
+    
+    <div class="info-box">
+        <p><strong>Important:</strong> The automatic binding ensures data security and prevents unauthorized access to other customers' or organizations' knowledge bases. Users can only access and manage knowledge bases within their assigned organizational scope.</p>
+    </div>
+    
+    <h1 id="section3">3. Dashboard Overview</h1>
+    
+    <h2>Initial Login Experience</h2>
+    
+    <p>For first-time users logging into the system:</p>
+    
+    <ul>
+        <li>No existing knowledge bases are present</li>
+        <li>The dashboard displays empty states with guidance for getting started</li>
+        <li>Customer and Organization cards show the automatically bound information</li>
+        <li>User must configure App Details from the available dropdown</li>
+    </ul>
+    
+    <h2>Knowledge Bases Card</h2>
+    
+    <p>This card contains three primary action buttons for knowledge base management:</p>
+    
+    <h3>1. Create New Guidelines (Green Button)</h3>
+    <p>Creates new response guidelines that can be applied to knowledge bases. These guidelines govern how the system responds to queries and ensure consistency across interactions.</p>
+    
+    <h3>2. Create New Knowledge Base</h3>
+    <p>Initiates the process of creating a new knowledge base. Clicking this button redirects users to the "Create New Knowledge Base" page where they can choose between Book Level and Study Level knowledge bases.</p>
+    
+    <h3>3. Create Study LO</h3>
+    <p>Opens the Study LO creation interface where users can upload and manage learning objectives in CSV format, configure agents, and associate them with existing books.</p>
+    
+    <div class="info-box">
+        <p><strong>Workflow Recommendation:</strong> For new users, we recommend starting with "Create New Knowledge Base" to establish Book Level knowledge bases before proceeding to Study LO creation.</p>
+    </div>
+    
+    <h2>Navigation Flow</h2>
+    
+    <div class="example">
+        <div class="example-title">Recommended First-Time User Workflow</div>
+        <ol>
+            <li>Login with credentials → Automatic binding to customer/organization</li>
+            <li>Select App Details from dropdown</li>
+            <li>Click "Create New Knowledge Base"</li>
+            <li>Create Book Level knowledge base</li>
+            <li>Click "Create Study LO" to upload learning objectives</li>
+            <li>Optionally create Study Level knowledge bases</li>
+            <li>Use AIG (Advanced Item Generator) for question generation</li>
+        </ol>
+    </div>
+    
+    <h1 id="section4">4. Book Level Knowledge Base Creation</h1>
+    
+    <h2>Accessing Creation Interface</h2>
+    
+    <ol>
+        <li>From the dashboard, click "Create New Knowledge Base"</li>
+        <li>You will be redirected to the "Create New Knowledge Base" page</li>
+    </ol>
+    
+    <h2>Select Knowledge Base Type Card</h2>
+    
+    <p>Choose between two knowledge base types:</p>
+    
+    <table>
+        <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Use Case</th>
+        </tr>
+        <tr>
+            <td>Book Level</td>
+            <td>High-level knowledge base containing entire book content</td>
+            <td>First-time creation, comprehensive content management</td>
+        </tr>
+        <tr>
+            <td>Study Level</td>
+            <td>Focused knowledge base for specific study/chapter content</td>
+            <td>Detailed chapter-level management, requires existing Book Level KB</td>
+        </tr>
+    </table>
+    
+    <div class="warning-box">
+        <p><strong>Important:</strong> First-time users must select "Book Level" to create their initial knowledge base. Study Level knowledge bases can only be created after a Book Level knowledge base exists.</p>
+    </div>
+    
+    <h2>Organization and Apps Card</h2>
+    
+    <ul>
+        <li><strong>Select Organization:</strong> Pre-filled and non-editable based on user login credentials</li>
+        <li><strong>Apps Details:</strong> Dropdown menu where users select the application context</li>
+    </ul>
+    
+    <h2>Basic Information Card</h2>
+    
+    <h3>Book Name</h3>
+    <p>Enter the name of the book for which you're creating the knowledge base.</p>
+    
+    <h3>Knowledge Base Name</h3>
+    <p>Enter a unique name for the knowledge base itself.</p>
+    
+    <h3>Naming Validations</h3>
+    
+    <p>Both Book Name and Knowledge Base Name must adhere to the following validation rules:</p>
+    
+    <table>
+        <tr>
+            <th>Rule</th>
+            <th>Description</th>
+            <th>Examples</th>
+        </tr>
+        <tr>
+            <td>Minimum Length</td>
+            <td>Must contain more than 3 characters</td>
+            <td>"Math" (invalid), "Mathematics" (valid)</td>
+        </tr>
+        <tr>
+            <td>Spaces</td>
+            <td>Not allowed - use underscores or hyphens instead</td>
+            <td>"science book" (invalid), "science_book" (valid)</td>
+        </tr>
+        <tr>
+            <td>Special Characters</td>
+            <td>Only underscore (_) and hyphen (-) are permitted</td>
+            <td>"book@2024" (invalid), "book-2024" (valid)</td>
+        </tr>
+        <tr>
+            <td>Character Types</td>
+            <td>Alphanumeric characters, underscores, and hyphens only</td>
+            <td>"book#1" (invalid), "book_1" (valid)</td>
+        </tr>
+    </table>
+    
+    <h3>Valid Examples</h3>
+    
+    <div class="success-box">
+        <ul>
+            <li><code>mathematics_grade_10</code></li>
+            <li><code>physics-concepts-2024</code></li>
+            <li><code>history_book_v2</code></li>
+            <li><code>biology-textbook-Q1</code></li>
+            <li><code>chemistry-fundamentals</code></li>
+        </ul>
+    </div>
+    
+    <h3>Invalid Examples</h3>
+    
+    <div class="error-box">
+        <ul>
+            <li><code>kb</code> - Too short (less than 3 characters)</li>
+            <li><code>science book</code> - Contains spaces</li>
+            <li><code>math@2024</code> - Contains special character (@)</li>
+            <li><code>book#new</code> - Contains special character (#)</li>
+            <li><code>text*book</code> - Contains special character (*)</li>
+        </ul>
+    </div>
+    
+    <h2>Document Upload Section</h2>
+    
+    <h3>Main Document Upload</h3>
+    <p>Upload the book content using one of these methods:</p>
+    <ul>
+        <li><strong>Drag and Drop:</strong> Drag files directly into the upload area</li>
+        <li><strong>Click to Select:</strong> Click the upload area to browse and select files</li>
+    </ul>
+    
+    <div class="info-box">
+        <p><strong>Supported Formats:</strong> PDF, DOCX, TXT files up to 50 MB each</p>
+        <p><strong>Multiple Files:</strong> You can upload multiple documents simultaneously</p>
+    </div>
+    
+    <h3>Cover Image Upload</h3>
+    <p>Optionally upload a cover image for the book. This image will be displayed in the knowledge base listing and provides visual identification.</p>
+    
+    <ul>
+        <li><strong>Supported Formats:</strong> JPG, PNG, GIF</li>
+        <li><strong>Recommended Size:</strong> 300x400 pixels or similar aspect ratio</li>
+        <li><strong>Maximum Size:</strong> 5 MB</li>
+    </ul>
+    
+    <h2>Proceeding to Processing Settings</h2>
+    
+    <p>After completing the Basic Information section and uploading documents:</p>
+    <ol>
+        <li>Review all entered information for accuracy</li>
+        <li>Ensure documents have uploaded successfully</li>
+        <li>Click "Next" or proceed to the Processing Settings section</li>
+    </ol>
+    
+    <h1 id="section5">5. Processing Settings</h1>
+    
+    <h2>5.1 Retrieval Strategy</h2>
+    
+    <p>The retrieval strategy determines how the system identifies and selects relevant document chunks when processing user queries. The system offers three distinct strategies:</p>
+    
+    <h3>Maximum Marginal Relevance (MMR)</h3>
+    
+    <h4>Overview</h4>
+    <p>MMR balances relevance and diversity to provide comprehensive yet non-redundant information. This algorithm iteratively selects documents that are both relevant to the query and dissimilar to already selected documents.</p>
+    
+    <h4>How It Works</h4>
+    <ol>
+        <li>Calculate relevance scores for all documents</li>
+        <li>Select the most relevant document first</li>
+        <li>For subsequent selections, balance relevance against diversity</li>
+        <li>Penalize documents too similar to already selected ones</li>
+        <li>Continue until k documents are selected</li>
+    </ol>
+    
+    <div class="example">
+        <div class="example-title">MMR Example</div>
+        <p><strong>Query:</strong> "Tell me about different types of renewable energy"</p>
+        <p><strong>Process:</strong> The system retrieves diverse chunks covering solar, wind, hydro, and geothermal energy rather than multiple similar chunks about just solar energy.</p>
+        <p><strong>Result:</strong> Comprehensive coverage of multiple renewable energy types with minimal redundancy.</p>
+    </div>
+    
+    <h4>Available Embedding Models for MMR</h4>
+    <ul>
+        <li>text-embedding-ada-002</li>
+        <li>text-embedding-3-large</li>
+    </ul>
+    
+    <h3>Similarity Search</h3>
+    
+    <h4>Overview</h4>
+    <p>Similarity search employs vector distance calculations to identify documents most semantically similar to the input query. This method calculates cosine similarity between the query embedding and all document embeddings in the vector store.</p>
+    
+    <h4>How It Works</h4>
+    <ol>
+        <li>Query is converted to a vector embedding</li>
+        <li>Cosine similarity is calculated against all document vectors</li>
+        <li>Documents are ranked by similarity score</li>
+        <li>Top-k most similar chunks are retrieved</li>
+    </ol>
+    
+    <div class="example">
+        <div class="example-title">Similarity Search Example</div>
+        <p><strong>Query:</strong> "What is Newton's First Law of Motion?"</p>
+        <p><strong>Process:</strong> The system retrieves the 5 most similar chunks that directly discuss Newton's First Law, inertia, and related concepts.</p>
+        <p><strong>Result:</strong> Highly relevant chunks specifically about Newton's First Law from physics textbook sections.</p>
+    </div>
+    
+    <h4>Available Embedding Models for Similarity</h4>
+    <ul>
+        <li>all-MiniLM-L6-v2</li>
+    </ul>
+    
+    <h3>Hybrid Cross Encoder (MMR + Similarity)</h3>
+    
+    <h4>Overview</h4>
+    <p>Hybrid approach combines the strengths of both MMR and Similarity search. It uses cross-encoder models to re-rank results from both strategies for optimal relevance and diversity.</p>
+    
+    <h4>How It Works</h4>
+    <ol>
+        <li>Perform both MMR and Similarity searches independently</li>
+        <li>Combine results from both strategies</li>
+        <li>Use cross-encoder model to re-rank combined results</li>
+        <li>Select top-k chunks based on cross-encoder scores</li>
+    </ol>
+    
+    <div class="example">
+        <div class="example-title">Hybrid Cross Encoder Example</div>
+        <p><strong>Query:</strong> "Explain photosynthesis and its importance"</p>
+        <p><strong>Process:</strong> System retrieves similar chunks about photosynthesis process (Similarity) and diverse chunks about importance, applications, and related concepts (MMR), then re-ranks them together.</p>
+        <p><strong>Result:</strong> Balanced coverage with both detailed process information and broader contextual importance.</p>
+    </div>
+    
+    <h4>Available Embedding Models for Hybrid</h4>
+    <ul>
+        <li>text-embedding-ada-002</li>
+        <li>text-embedding-3-large</li>
+        <li>all-MiniLM-L6-v2</li>
+    </ul>
+    
+    <h2>5.2 Number of k Values</h2>
+    
+    <h3>Overview</h3>
+    <p>The k parameter defines how many related chunks (contents) are retrieved for a query. For example, if k = 5, the system retrieves the top 5 most relevant chunks. Increasing k can improve coverage, but it can slow down processing because more content is included in the prompt/context sent to the model. Using a very low k can improve speed, but may reduce accuracy due to limited retrieved context.</p>
+    
+    <h3>Configuration</h3>
+    <ul>
+        <li><strong>Default Value:</strong> 5</li>
+        <li><strong>Minimum Value:</strong> 1</li>
+        <li><strong>Maximum Value:</strong> 8</li>
+        <li><strong>Step:</strong> 1</li>
+    </ul>
+    
+    <h3>Recommendations</h3>
+    <table>
+        <tr>
+            <th>k Value</th>
+            <th>Use Case</th>
+            <th>Performance Impact</th>
+        </tr>
+        <tr>
+            <td>1-3</td>
+            <td>Simple queries, fast processing</td>
+            <td>Fastest, limited coverage</td>
+        </tr>
+        <tr>
+            <td>4-6</td>
+            <td>Standard queries, balanced approach</td>
+            <td>Optimal balance</td>
+        </tr>
+        <tr>
+            <td>7-8</td>
+            <td>Complex queries, maximum coverage</td>
+            <td>Slower, comprehensive</td>
+        </tr>
+    </table>
+    
+    <h2>5.3 Chunk Size</h2>
+    
+    <h3>Overview</h3>
+    <p>Chunk size determines how documents are segmented into smaller, processable units. The optimal chunk size depends on your content type and the granularity of information required.</p>
+    
+    <h3>Available Options</h3>
+    <ul>
+        <li>20 tokens</li>
+        <li>100 tokens</li>
+        <li>250 tokens</li>
+        <li>500 tokens</li>
+        <li>1000 tokens</li>
+    </ul>
+    
+    <h3>Selection Guidelines</h3>
+    <table>
+        <tr>
+            <th>Chunk Size</th>
+            <th>Best For</th>
+            <th>Example Use Cases</th>
+        </tr>
+        <tr>
+            <td>20 tokens</td>
+            <td>Definitions, short facts</td>
+            <td>Vocabulary terms, formula definitions</td>
+        </tr>
+        <tr>
+            <td>100 tokens</td>
+            <td>Short explanations, FAQs</td>
+            <td>Concept explanations, brief examples</td>
+        </tr>
+        <tr>
+            <td>250 tokens</td>
+            <td>Standard paragraphs, procedures</td>
+            <td>Method explanations, step-by-step guides</td>
+        </tr>
+        <tr>
+            <td>500 tokens</td>
+            <td>Detailed explanations</td>
+            <td>Case studies, detailed examples</td>
+        </tr>
+        <tr>
+            <td>1000 tokens</td>
+            <td>Long-form content</td>
+            <td>Chapter summaries, comprehensive topics</td>
+        </tr>
+    </table>
+    
+    <h2>5.4 Overlap Percentage</h2>
+    
+    <h3>Overview</h3>
+    <p>Overlap creates redundancy between adjacent chunks to preserve contextual continuity across chunk boundaries. This prevents information loss when concepts span multiple chunks.</p>
+    
+    <h3>Available Options</h3>
+    <ul>
+        <li>10%</li>
+        <li>15%</li>
+        <li>20%</li>
+        <li>25%</li>
+        <li>50%</li>
+    </ul>
+    
+    <div class="example">
+        <div class="example-title">Overlap Example: 20% Overlap</div>
+        <p><strong>Original Text (simplified):</strong> "Photosynthesis is the process plants use to convert sunlight into energy. This process requires chlorophyll, which gives plants their green color. Photosynthesis occurs in chloroplasts and produces oxygen as a byproduct."</p>
+        
+        <p><strong>Without Overlap (0%):</strong></p>
+        <ul>
+            <li>Chunk 1: "Photosynthesis is the process plants use to convert sunlight into energy."</li>
+            <li>Chunk 2: "This process requires chlorophyll, which gives plants their green color."</li>
+            <li>Chunk 3: "Photosynthesis occurs in chloroplasts and produces oxygen as a byproduct."</li>
+            <li><strong>Issue:</strong> Context break between chunks</li>
+        </ul>
+        
+        <p><strong>With 20% Overlap:</strong></p>
+        <ul>
+            <li>Chunk 1: "Photosynthesis is the process plants use to convert sunlight into energy."</li>
+            <li>Chunk 2: "sunlight into energy. This process requires chlorophyll, which gives plants their green color."</li>
+            <li>Chunk 3: "green color. Photosynthesis occurs in chloroplasts and produces oxygen as a byproduct."</li>
+            <li><strong>Benefit:</strong> Maintains context continuity across chunk boundaries</li>
+        </ul>
+    </div>
+    
+    <h2>5.5 Chunking Strategy</h2>
+    
+    <h3>Paragraph Strategy</h3>
+    <p>Splits text at paragraph boundaries, preserving the natural flow of content.</p>
+    
+    <div class="example">
+        <div class="example-title">Paragraph Chunking Example</div>
+        <p><strong>Original Text:</strong></p>
+        <p>"The water cycle describes how water evaporates from the Earth's surface, rises into the atmosphere, cools and condenses into rain or snow in clouds, and falls again to the surface as precipitation.</p>
+        <p>The water that falls on land collects in rivers and lakes, soil, and porous layers of rock, and much of it flows back into the oceans."</p>
+        
+        <p><strong>Resulting Chunks:</strong></p>
+        <ul>
+            <li>Chunk 1: Entire first paragraph about evaporation and condensation</li>
+            <li>Chunk 2: Entire second paragraph about collection and flow</li>
+        </ul>
+    </div>
+    
+    <h4>Best For</h4>
+    <ul>
+        <li>Well-structured documents with clear paragraphs</li>
+        <li>Content where paragraph boundaries represent logical breaks</li>
+        <li>Narrative and explanatory content</li>
+    </ul>
+    
+    <h3>Recursive Character Strategy</h3>
+    <p>Recursively splits text based on character count, attempting to break at sentence boundaries when possible.</p>
+    
+    <div class="example">
+        <div class="example-title">Recursive Character Chunking Example</div>
+        <p><strong>Original Text (with chunk size = 100 characters):</strong></p>
+        <p>"Mathematics is the study of numbers, shapes, and patterns. It is a fundamental discipline that underpins many sciences. Algebra, geometry, and calculus are major branches."</p>
+        
+        <p><strong>Resulting Chunks:</strong></p>
+        <ul>
+            <li>Chunk 1: "Mathematics is the study of numbers, shapes, and patterns. It is a fundamental"</li>
+            <li>Chunk 2: "discipline that underpins many sciences. Algebra, geometry, and calculus are"</li>
+            <li>Chunk 3: "major branches."</li>
+        </ul>
+    </div>
+    
+    <h4>Best For</h4>
+    <ul>
+        <li>Documents without clear paragraph structure</li>
+        <li>Ensuring consistent chunk sizes</li>
+        <li>Technical documentation with mixed content types</li>
+    </ul>
+    
+    <h2>5.6 Database Type</h2>
+    
+    <h3>FAISS (Facebook AI Similarity Search)</h3>
+    <ul>
+        <li><strong>Performance:</strong> Extremely fast similarity search</li>
+        <li><strong>Scalability:</strong> Handles millions of vectors efficiently</li>
+        <li><strong>Best For:</strong> Production environments, large datasets</li>
+    </ul>
+    
+    <h3>ChromaDB</h3>
+    <ul>
+        <li><strong>Ease of Use:</strong> Simple configuration and deployment</li>
+        <li><strong>Persistence:</strong> Built-in data persistence</li>
+        <li><strong>Best For:</strong> Development, testing, smaller deployments</li>
+    </ul>
+    
+    <h2>5.7 Embedding Models</h2>
+    
+    <h3>Model Availability by Retrieval Strategy</h3>
+    <table>
+        <tr>
+            <th>Embedding Model</th>
+            <th>MMR</th>
+            <th>Similarity</th>
+            <th>Hybrid</th>
+        </tr>
+        <tr>
+            <td>text-embedding-ada-002</td>
+            <td>✓ Available</td>
+            <td>✗ Not Available</td>
+            <td>✓ Available</td>
+        </tr>
+        <tr>
+            <td>text-embedding-3-large</td>
+            <td>✓ Available</td>
+            <td>✗ Not Available</td>
+            <td>✓ Available</td>
+        </tr>
+        <tr>
+            <td>all-MiniLM-L6-v2</td>
+            <td>✗ Not Available</td>
+            <td>✓ Available</td>
+            <td>✓ Available</td>
+        </tr>
+    </table>
+    
+    <h3>Model Specifications</h3>
+    <table>
+        <tr>
+            <th>Model</th>
+            <th>Dimensions</th>
+            <th>Provider</th>
+            <th>Best For</th>
+        </tr>
+        <tr>
+            <td>text-embedding-ada-002</td>
+            <td>1536</td>
+            <td>OpenAI</td>
+            <td>General purpose, balanced performance</td>
+        </tr>
+        <tr>
+            <td>text-embedding-3-large</td>
+            <td>3072</td>
+            <td>OpenAI</td>
+            <td>Maximum accuracy, complex content</td>
+        </tr>
+        <tr>
+            <td>all-MiniLM-L6-v2</td>
+            <td>384</td>
+            <td>Open Source</td>
+            <td>Cost-effective, privacy-sensitive</td>
+        </tr>
+    </table>
+    
+    <h2>5.8 Creating the Knowledge Base</h2>
+    
+    <h3>Final Review and Creation</h3>
+    <ol>
+        <li>Review all processing settings</li>
+        <li>Click "Create Knowledge Base" button</li>
+        <li>Wait for processing completion</li>
+        <li>Receive confirmation pop-up: "Knowledge Base has been successfully created"</li>
+        <li>Click "OK" to navigate back to dashboard</li>
+    </ol>
+    
+    <h3>Processing Operations</h3>
+    <p>During creation, the system performs:</p>
+    <ol>
+        <li>Document parsing and text extraction</li>
+        <li>Text cleaning and normalization</li>
+        <li>Chunking based on selected strategy</li>
+        <li>Embedding generation using selected model</li>
+        <li>Vector storage in selected database</li>
+        <li>Metadata indexing and relationship building</li>
+    </ol>
+    
+    <div class="success-box">
+        <p><strong>Success:</strong> After creation, the new knowledge base will appear in the "Knowledge Bases" card on your dashboard, ready for use.</p>
+    </div>
+    
+    <h1 id="section6">6. Study LO Creation</h1>
+    
+    <h2>Accessing Study LO Interface</h2>
+    <ol>
+        <li>From dashboard, click "Create Study LO" button</li>
+        <li>You will be redirected to the Study LO creation page</li>
+    </ol>
+    
+    <h2>Select Book Section</h2>
+    <p>Users can see and select from books they uploaded during knowledge base creation. The dropdown displays all Book Level knowledge bases created by the user.</p>
+    
+    <h2>Select Apps Section</h2>
+    <p>Choose the application context for the Study LO. This should match the app selection used for the corresponding knowledge base.</p>
+    
+    <h2>Agent Configuration Card</h2>
+    
+    <h3>Available Agents</h3>
+    <table>
+        <tr>
+            <th>Agent</th>
+            <th>Default</th>
+            <th>Description</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td>Retrieval</td>
+            <td>✓ Selected</td>
+            <td>Information retrieval agent</td>
+            <td>Retrieves relevant content from knowledge base</td>
+        </tr>
+        <tr>
+            <td>Compliance</td>
+            <td>✗ Not Selected</td>
+            <td>Compliance checking agent</td>
+            <td>Ensures content meets standards and guidelines</td>
+        </tr>
+        <tr>
+            <td>Match Generation</td>
+            <td>✗ Not Selected</td>
+            <td>Matching content generator</td>
+            <td>Generates matching exercises and questions</td>
+        </tr>
+        <tr>
+            <td>Assessment</td>
+            <td>✓ Selected</td>
+            <td>Assessment generation agent</td>
+            <td>Creates assessment questions and evaluations</td>
+        </tr>
+    </table>
+    
+    <h3>Agent Configuration</h3>
+    <p>Users can select/deselect agents based on their requirements. At minimum, Retrieval and Assessment agents are recommended for most use cases.</p>
+    
+    <h2>Study LO Document Upload</h2>
+    
+    <h3>Required Format</h3>
+    <ul>
+        <li><strong>Format:</strong> CSV (Comma-Separated Values)</li>
+        <li><strong>Template:</strong> Download required format by clicking "Download Template" option</li>
+        <li><strong>Content:</strong> Learning objectives in structured format</li>
+    </ul>
+    
+    <h3>Upload Process</h3>
+    <ol>
+        <li>Click "Upload Study LO Document"</li>
+        <li>Select CSV file from your system</li>
+        <li>Verify file upload success</li>
+        <li>Review agent configuration selections</li>
+        <li>Click "Submit" button</li>
+    </ol>
+    
+    <h3>Processing</h3>
+    <p>Upon submission, the system:</p>
+    <ol>
+        <li>Validates CSV format and structure</li>
+        <li>Processes learning objectives</li>
+        <li>Configures selected agents</li>
+        <li>Associates Study LO with selected book</li>
+        <li>Stores configuration for future use</li>
+    </ol>
+    
+    <div class="info-box">
+        <p><strong>Note:</strong> Study LO creation is required before creating Study Level knowledge bases. The uploaded learning objectives will be available for selection when creating Study Level knowledge bases.</p>
+    </div>
+    
+    <h1 id="section7">7. Study Level Knowledge Base Creation</h1>
+    
+    <h2>When to Create Study Level Knowledge Bases</h2>
+    <p>Study Level knowledge bases should be created when you need focused, chapter-specific knowledge management. This is particularly useful for:</p>
+    <ul>
+        <li>Individual chapter or unit management</li>
+        <li>Specialized content for specific learning objectives</li>
+        <li>Focused question generation for particular topics</li>
+        <li>Granular content control and updates</li>
+    </ul>
+    
+    <h2>Creation Process</h2>
+    
+    <h3>Step 1: Access Creation Interface</h3>
+    <ol>
+        <li>From dashboard, click "Create New Knowledge Base"</li>
+        <li>On the creation page, select "Study Level" from Knowledge Base Type</li>
+    </ol>
+    
+    <h3>Step 2: Select Book</h3>
+    <p>Choose the book from which you want to create a study-level knowledge base. Only books with existing Book Level knowledge bases are available.</p>
+    
+    <h3>Step 3: Select Study</h3>
+    <p>Choose from the studies (learning objectives) uploaded during Study LO creation. The dropdown displays all Study LOs associated with the selected book.</p>
+    
+    <h3>Step 4: Upload Study Documents</h3>
+    <p>Upload documents specific to the selected study. These should be focused on the particular chapter or learning objective.</p>
+    
+    <div class="info-box">
+        <p><strong>Best Practice:</strong> Upload chapter-specific documents, focused exercises, or topic-specific materials rather than entire books.</p>
+    </div>
+    
+    <h3>Step 5: Configure Processing Settings</h3>
+    <p>Follow the same Processing Settings configuration as Book Level knowledge bases, but consider:</p>
+    <ul>
+        <li><strong>Smaller Chunk Sizes:</strong> 100-250 tokens for focused content</li>
+        <li><strong>Higher Overlap:</strong> 20-25% for context preservation in specialized content</li>
+        <li><strong>Similarity Search:</strong> Often sufficient for focused study-level queries</li>
+    </ul>
+    
+    <h3>Step 6: Create Knowledge Base</h3>
+    <p>Click "Create Knowledge Base" and follow the same confirmation process as Book Level creation.</p>
+    
+    <h2>Benefits of Study Level Knowledge Bases</h2>
+    
+    <table>
+        <tr>
+            <th>Benefit</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Focused Retrieval</td>
+            <td>More accurate results for chapter-specific queries</td>
+        </tr>
+        <tr>
+            <td>Targeted Updates</td>
+            <td>Update specific chapters without affecting entire book</td>
+        </tr>
+        <tr>
+            <td>Specialized Configuration</td>
+            <td>Optimize settings for specific content types</td>
+        </tr>
+        <tr>
+            <td>Granular Management</td>
+            <td>Manage learning objectives independently</td>
+        </tr>
+    </table>
+    
+    <h1 id="section8">8. Knowledge Base Management</h1>
+    
+    <h2>Knowledge Bases Card View</h2>
+    <p>After creating knowledge bases, they appear in the dashboard's Knowledge Bases card with the following information:</p>
+    <p>The Knowledge Bases view includes a search bar and a type filter (for example, <strong>All Types</strong>) to help you quickly find knowledge bases.</p>
+    <p>The table displays the following columns:</p>
+    <ul>
+        <li><strong>Knowledge Base Name:</strong> The unique knowledge base name you provided during creation</li>
+        <li><strong>Book Name:</strong> The book name associated with the knowledge base (shown for both Book Level and Study Level)</li>
+        <li><strong>Type:</strong> Indicates whether the knowledge base is <strong>Book Level</strong> or <strong>Study Level</strong></li>
+        <li><strong>Actions:</strong> Quick action icons to manage the knowledge base (for example: edit, add/tag guidelines, chat, tagging, delete)</li>
+    </ul>
+    
+    <h2>Action Column Functions</h2>
+    
+    <h3>Edit Knowledge Base</h3>
+    <p>Allows modification of knowledge base settings, adding/removing documents, and updating configurations.</p>
+    
+    <h3>Add Guidelines</h3>
+    <p>Opens the guidelines management interface where you can create or tag guidelines for the specific knowledge base.</p>
+    
+    <h3>Chat with Document</h3>
+    <p>Opens a chat interface where you can query the knowledge base and get AI-powered responses based on the uploaded documents.</p>
+    
+    <h3>Tag Agents</h3>
+    <p>User can tag Agents without uploading the Study LOs. This feature will help for the customer not on Item Generation</p>
+    
+    <h3>Delete Knowledge Base</h3>
+    
+    <div class="warning-box">
+        <p><strong>Important:</strong> Deleting a knowledge base is a permanent action that cannot be undone. This operation removes:</p>
+        <ul>
+            <li>All document embeddings and vector database entries</li>
+            <li>Associated metadata and processing history</li>
+            <li>Any associated Study LOs (for Book Level deletion)</li>
+            <li>All configurations and settings</li>
+        </ul>
+        <p>Always ensure you have backups before deleting a knowledge base.</p>
+    </div>
+    
+    <h2>Knowledge Base Relationships</h2>
+    
+    <h3>Hierarchical Structure</h3>
+    <ul>
+        <li><strong>Book Level Knowledge Base:</strong> Parent container for Study Level knowledge bases</li>
+        <li><strong>Study Level Knowledge Base:</strong> Child of Book Level, associated with specific Study LOs</li>
+        <li><strong>Study LOs:</strong> Learning objectives linked to both Book and Study Level knowledge bases</li>
+    </ul>
+    
+    <h3>Deletion Dependencies</h3>
+    <div class="warning-box">
+        <p><strong>Critical:</strong> Deleting a Book Level knowledge base does <strong>not</strong> automatically delete Study Level knowledge bases. Study Level knowledge bases remain available.</p>
+    </div>
+    
+    <h1 id="section9">9. Guidelines Management</h1>
+    
+    <h2>Accessing Guidelines Management</h2>
+    <p>There are two ways to access guidelines management:</p>
+    
+    <h3>Option 1: From Dashboard</h3>
+    <p>Click the green "Create New Guidelines" button on the Knowledge Bases card to create general guidelines that can be tagged to multiple knowledge bases.</p>
+    
+    <h3>Option 2: From Knowledge Base Actions</h3>
+    <p>Click "Add Guidelines" in the Action column of a specific knowledge base to tag guidelines to that particular knowledge base.</p>
+    
+    <h2>Types of Guidelines</h2>
+    
+    <h3>General Guidelines</h3>
+    <p>Pre-created guidelines that can be tagged to multiple knowledge bases. These include:</p>
+    <ul>
+        <li><strong>Response Style Guidelines:</strong> Tone, format, and structure requirements</li>
+        <li><strong>Compliance Guidelines:</strong> Regulatory and policy requirements</li>
+        <li><strong>Educational Standards:</strong> Curriculum and assessment standards</li>
+        <li><strong>Brand Guidelines:</strong> Organizational voice and terminology</li>
+    </ul>
+    
+    <h3>Custom Guidelines</h3>
+    <p>Guidelines created by users for specific knowledge bases. These can include:</p>
+    <ul>
+        <li>Subject-specific terminology preferences</li>
+        <li>Assessment difficulty levels</li>
+        <li>Preferred explanation styles</li>
+        <li>Content inclusion/exclusion rules</li>
+    </ul>
+    
+    <h2>Creating New Guidelines</h2>
+    
+    <h3>Step-by-Step Process</h3>
+    <ol>
+        <li>Click "Create New Guidelines" from dashboard</li>
+        <li>Enter guideline name and description</li>
+        <li>Select guideline type </li>
+        <li>Enter guideline content using the text editor</li>
+        <li>Optionally upload guideline document (PDF or TXT)</li>
+        <li>Click "Save Guidelines"</li>
+    </ol>
+    
+    <h3>Guideline Content Structure</h3>
+    <div class="code-block">
+# Response Guidelines for Science Content
+
+## Tone and Style
+- Use formal academic tone
+- Explain concepts clearly for grade-level understanding
+- Include real-world examples when possible
+
+## Content Requirements
+- Always cite scientific principles
+- Include relevant formulas and units
+- Explain cause-effect relationships
+
+## Assessment Standards
+- Questions should test understanding, not memorization
+- Include multiple question types: MCQs, short answer, explanation
+- Difficulty distribution: 60% easy, 30% medium, 10% hard
+
+## Compliance
+- Align with national curriculum standards
+- Include safety warnings for experiments
+- Ensure age-appropriate content
+    </div>
+    
+    <h2>Tagging Guidelines to Knowledge Bases</h2>
+    
+    <h3>From Knowledge Base Actions</h3>
+    <ol>
+        <li>Click "Add Guidelines" in the Action column</li>
+        <li>Browse available guidelines (General and previously created Custom)</li>
+        <li>Select guidelines to tag to the knowledge base</li>
+        <li>Click "Apply Guidelines"</li>
+        <li>Guidelines are now active for that knowledge base</li>
+    </ol>
+    
+    <h3>Guideline Priority System</h3>
+    <ul>
+        <li><strong>Custom Guidelines:</strong> Highest priority, override general guidelines</li>
+        <li><strong>Multiple Guidelines:</strong> Combined with AND logic</li>
+        <li><strong>Conflicting Rules:</strong> Custom guidelines take precedence</li>
+    </ul>
+    
+    <div class="info-box">
+        <p><strong>Best Practice:</strong> Start with general guidelines for consistency across knowledge bases, then add custom guidelines for specific requirements. Review and update guidelines periodically as content and requirements evolve.</p>
+    </div>
+    
+    <h2>Guideline Impact on System Behavior</h2>
+    
+    <h3>Response Generation</h3>
+    <p>Guidelines influence how the system generates responses to queries by:</p>
+    <ul>
+        <li>Controlling tone and style of answers</li>
+        <li>Ensuring compliance with standards</li>
+        <li>Maintaining consistency across similar queries</li>
+        <li>Enforcing content quality standards</li>
+    </ul>
+    
+    <h3>Question Generation (AIG)</h3>
+    <p>In the Advanced Item Generator application, guidelines affect:</p>
+    <ul>
+        <li>Question difficulty levels</li>
+        <li>Question types and formats</li>
+        <li>Content coverage and distribution</li>
+        <li>Assessment standards compliance</li>
+    </ul>
+    
+    <h1 id="section10">10. Best Practices</h1>
+    
+    <h2>Document Preparation</h2>
+    
+    <h3>Content Organization</h3>
+    <ul>
+        <li><strong>Clear Structure:</strong> Use consistent headings and sections</li>
+        <li><strong>Book-Level Documents:</strong> Complete books or comprehensive content</li>
+        <li><strong>Study-Level Documents:</strong> Focused chapter or topic content</li>
+        <li><strong>Quality Check:</strong> Ensure accuracy and clarity before upload</li>
+    </ul>
+    
+    <h3>File Management</h3>
+    <ul>
+        <li>Name files descriptively (e.g., "chapter3_photosynthesis.pdf")</li>
+        <li>Keep files under 50MB for optimal processing</li>
+        <li>Use standard formats (PDF for scanned, DOCX for editable)</li>
+        <li>Organize files before upload to minimize adjustments</li>
+    </ul>
+    
+    <h2>Setting Selection Guidelines</h2>
+    
+    <h3>Default Configurations</h3>
+    <table>
+        <tr>
+            <th>Setting</th>
+            <th>Book Level Default</th>
+            <th>Study Level Default</th>
+        </tr>
+        <tr>
+            <td>Retrieval Strategy</td>
+            <td>Hybrid Cross Encoder</td>
+            <td>Similarity Search</td>
+        </tr>
+        <tr>
+            <td>k Value</td>
+            <td>5</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Chunk Size</td>
+            <td>250 tokens</td>
+            <td>100 tokens</td>
+        </tr>
+        <tr>
+            <td>Overlap Percentage</td>
+            <td>20%</td>
+            <td>25%</td>
+        </tr>
+        <tr>
+            <td>Chunking Strategy</td>
+            <td>Paragraph</td>
+            <td>Recursive Character</td>
+        </tr>
+        <tr>
+            <td>Database</td>
+            <td>FAISS</td>
+            <td>FAISS</td>
+        </tr>
+        <tr>
+            <td>Embedding Model</td>
+            <td>text-embedding-ada-002</td>
+            <td>all-MiniLM-L6-v2</td>
+        </tr>
+    </table>
+    
+    <h3>Optimization Based on Content Type</h3>
+    
+    <h4>For Narrative/Explanatory Content</h4>
+    <ul>
+        <li><strong>Chunk Size:</strong> 250-500 tokens</li>
+        <li><strong>Overlap:</strong> 15-20%</li>
+        <li><strong>Strategy:</strong> Paragraph chunking</li>
+        <li><strong>Retrieval:</strong> MMR or Hybrid</li>
+    </ul>
+    
+    <h4>For Technical/Reference Content</h4>
+    <ul>
+        <li><strong>Chunk Size:</strong> 100-250 tokens</li>
+        <li><strong>Overlap:</strong> 20-25%</li>
+        <li><strong>Strategy:</strong> Recursive character</li>
+        <li><strong>Retrieval:</strong> Similarity search</li>
+    </ul>
+    
+    <h4>For Assessment/Question Content</h4>
+    <ul>
+        <li><strong>Chunk Size:</strong> 20-100 tokens</li>
+        <li><strong>Overlap:</strong> 10-15%</li>
+        <li><strong>Strategy:</strong> Recursive character</li>
+        <li><strong>Retrieval:</strong> Similarity search</li>
+    </ul>
+    
+    <h2>Workflow Optimization</h2>
+    
+    <h3>Recommended Sequence</h3>
+    <div class="example">
+        <div class="example-title">Optimal Workflow Sequence</div>
+        <ol>
+            <li><strong>Initial Setup:</strong> Login → Verify auto-bound customer/organization → Select App Details</li>
+            <li><strong>Book Level Creation:</strong> Create Book Level knowledge base with comprehensive content</li>
+            <li><strong>Study LO Management:</strong> Upload learning objectives and configure agents</li>
+            <li><strong>Guidelines Setup:</strong> Create and tag guidelines to knowledge bases</li>
+            <li><strong>Study Level Creation:</strong> Create focused knowledge bases for specific chapters</li>
+            <li><strong>Testing:</strong> Use chat feature to test knowledge base responses</li>
+            <li><strong>AIG Integration:</strong> Generate questions using Advanced Item Generator</li>
+        </ol>
+    </div>
+    
+    <h3>Performance Monitoring</h3>
+    <ul>
+        <li>Track processing times for different document types</li>
+        <li>Monitor query response accuracy</li>
+        <li>Review AIG-generated question quality</li>
+        <li>Collect user feedback on system performance</li>
+    </ul>
+    
+    <h2>Maintenance Best Practices</h2>
+    
+    <h3>Regular Updates</h3>
+    <ul>
+        <li><strong>Monthly:</strong> Review and update guidelines</li>
+        <li><strong>Quarterly:</strong> Audit knowledge base content</li>
+        <li><strong>Bi-annually:</strong> Review processing settings</li>
+        <li><strong>Annually:</strong> Comprehensive system review</li>
+    </ul>
+    
+    <h3>Content Management</h3>
+    <ul>
+        <li>Archive outdated knowledge bases instead of deleting</li>
+        <li>Maintain version history of important documents</li>
+        <li>Document configuration changes for future reference</li>
+        <li>Backup critical knowledge bases before major updates</li>
+    </ul>
+    
+    <h1 id="section11">11. Troubleshooting</h1>
+    
+    <h2>Common Issues and Solutions</h2>
+    
+    <h3>Login and Access Issues</h3>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Possible Cause</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Cannot see expected customer/organization</td>
+            <td>Account not properly linked in system</td>
+            <td>Contact administrator to verify account mapping</td>
+        </tr>
+        <tr>
+            <td>No apps available in dropdown</td>
+            <td>No apps configured for organization</td>
+            <td>Contact administrator to configure apps</td>
+        </tr>
+        <tr>
+            <td>Cannot access knowledge bases</td>
+            <td>Permission restrictions</td>
+            <td>Verify user role and permissions</td>
+        </tr>
+    </table>
+    
+    <h3>Knowledge Base Creation Issues</h3>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Possible Cause</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Validation errors for names</td>
+            <td>Invalid characters or length</td>
+            <td>Follow naming conventions: alphanumeric, underscores, hyphens only</td>
+        </tr>
+        <tr>
+            <td>Upload failures</td>
+            <td>File size > 50MB or unsupported format</td>
+            <td>Check file size and convert to supported format</td>
+        </tr>
+        <tr>
+            <td>Cannot select Study Level</td>
+            <td>No Book Level knowledge base exists</td>
+            <td>Create Book Level knowledge base first</td>
+        </tr>
+        <tr>
+            <td>No studies available for selection</td>
+            <td>Study LOs not uploaded for book</td>
+            <td>Upload Study LOs before creating Study Level KB</td>
+        </tr>
+    </table>
+    
+    <h3>Processing and Performance Issues</h3>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Possible Cause</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Slow processing</td>
+            <td>Large files or complex settings</td>
+            <td>Reduce chunk size, decrease k value, use simpler retrieval</td>
+        </tr>
+        <tr>
+            <td>High memory usage</td>
+            <td>Large overlap or many small chunks</td>
+            <td>Reduce overlap percentage, increase chunk size</td>
+        </tr>
+        <tr>
+            <td>Poor retrieval quality</td>
+            <td>Inappropriate settings for content type</td>
+            <td>Adjust chunk size, overlap, or retrieval strategy</td>
+        </tr>
+        <tr>
+            <td>Embedding model errors</td>
+            <td>Model not available for selected strategy</td>
+            <td>Check model-strategy compatibility table</td>
+        </tr>
+    </table>
+    
+    <h3>Study LO Issues</h3>
+    <table>
+        <tr>
+            <th>Issue</th>
+            <th>Possible Cause</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>CSV upload failure</td>
+            <td>Invalid format or structure</td>
+            <td>Use provided template, check column headers</td>
+        </tr>
+        <tr>
+            <td>Agents not functioning</td>
+            <td>Configuration errors</td>
+            <td>Verify agent selection and configuration</td>
+        </tr>
+        <tr>
+            <td>Study LOs not appearing</td>
+            <td>Upload processing incomplete</td>
+            <td>Wait for processing or re-upload file</td>
+        </tr>
+    </table>
+    
+    <h2>Performance Optimization Tips</h2>
+    
+    <h3>For Faster Processing</h3>
+    <ul>
+        <li>Use smaller chunk sizes (100-250 tokens)</li>
+        <li>Reduce overlap percentage (10-15%)</li>
+        <li>Use Similarity search instead of MMR or Hybrid</li>
+        <li>Select all-MiniLM-L6-v2 embedding model</li>
+        <li>Process documents in smaller batches</li>
+    </ul>
+    
+    <h3>For Better Accuracy</h3>
+    <ul>
+        <li>Increase chunk size for context (250-500 tokens)</li>
+        <li>Use higher overlap (20-25%) for continuity</li>
+        <li>Select Hybrid Cross Encoder retrieval</li>
+        <li>Use text-embedding-3-large model</li>
+        <li>Ensure clear document structure</li>
+    </ul>
+    
+    <h2>Getting Support</h2>
+    
+    <div class="info-box">
+        <p><strong>For Additional Assistance:</strong></p>
+        <ul>
+            <li>Check system logs for detailed error messages</li>
+            <li>Review configuration settings for inconsistencies</li>
+            <li>Contact technical support with specific error details</li>
+            <li>Provide sample documents and expected outcomes</li>
+            <li>Include screenshots of error messages</li>
+        </ul>
+    </div>
+    
+    <h1 style="border:none; page-break-before:auto;">Conclusion</h1>
+    
+    <p>The Knowledge Base System provides a comprehensive, intelligent solution for educational content management and question answering. With its user-based access control, automatic customer/organization binding, and multi-level knowledge base structure (Book Level and Study Level), it offers a robust platform for managing educational content. The system's advanced features including multiple retrieval strategies (MMR, Similarity, Hybrid), configurable processing settings, Study LO management with agent configuration, and guidelines management ensure flexibility and adaptability to diverse educational needs.</p>
+    
+    <p>By following the structured workflow—starting with Book Level knowledge base creation, proceeding to Study LO upload and agent configuration, and optionally creating Study Level knowledge bases—users can build a comprehensive knowledge ecosystem. The integration with Advanced Item Generator (AIG) enables automated question generation, making the system invaluable for educational content creators, teachers, and institutions.</p>
+    
+    <p>Adherence to the best practices outlined in this documentation will help maintain optimal system performance, ensure high-quality outputs, and provide a seamless user experience. Regular maintenance, careful configuration, and systematic troubleshooting will ensure the knowledge base system continues to meet evolving educational needs effectively.</p>
+
+    <div class="footer">
+        &copy; 2026 Knowledge Base System By Tarun D R .
+    </div>
+
+    </div>
+
+    <div id="flowchart-view">
+    <div class="container">
+        <h1>Knowledge Base System - Complete Workflow Flowchart</h1>
+        
+        <div class="note">
+            <strong>Note:</strong> This flowchart provides a visual representation of the complete knowledge base creation and management workflow. Use the legend below to understand different node types.
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e3f2fd;"></div>
+                <span><strong>Start/End Points:</strong> Beginning or completion of processes</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #c8e6c9;"></div>
+                <span><strong>User Actions:</strong> Steps performed by the user</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #fff9c4;"></div>
+                <span><strong>System Processes:</strong> Automated system operations</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #ffcdd2;"></div>
+                <span><strong>Decisions/Branching:</strong> Points where workflow splits</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #e1bee7;"></div>
+                <span><strong>Configuration Steps:</strong> Settings and configurations</span>
+            </div>
+        </div>
+        
+        <div class="flowchart-container">
+            <div class="mermaid">
+flowchart TB
+    Start([Start: User Login]) --> AILevate[Navigate to AI Levate Apps]
+    AILevate --> Sidebar[Click Knowledge Base Icon<br/>in Left Sidebar]
+    Sidebar --> Dashboard[Knowledge Base Dashboard]
+    
+    Dashboard --> Cards{Knowledge Bases Card<br/>Three Options}
+    
+    Cards --> B1[Create New Guidelines]
+    Cards --> B2[Create New Knowledge Base]
+    Cards --> B3[Create Study LO]
+    
+    %% Create New Guidelines Path - General Guidelines
+    B1 --> GuidelinePage[Add New Guideline Page<br/>General Guidelines Section]
+    GuidelinePage --> GLType[Select Guideline Type<br/>from Dropdown]
+    GLType --> GLSubtype{Select Guideline Subtype?<br/>Optional}
+    GLSubtype -->|Yes| AutoName[Subtype Auto-fills<br/>as Guideline Name]
+    GLSubtype -->|No| CustomName[Enter Custom<br/>Guideline Name]
+    
+    AutoName --> GLContent[Add Guideline Content]
+    CustomName --> GLContent
+    
+    GLContent --> ContentType{Content Type}
+    ContentType -->|Type Text| TypeText[Enter Text in<br/>Guideline to Follow Field]
+    ContentType -->|Upload File| UploadFile[Upload TXT or PDF<br/>MAX 5MB]
+    
+    TypeText --> UploadGLBtn[Click Upload Guideline Button]
+    UploadFile --> UploadGLBtn
+    
+    UploadGLBtn --> AllGLCard[All Guidelines Card<br/>Lists General Guidelines]
+    AllGLCard --> GLActions{Guideline Actions}
+    GLActions --> EditGL[Edit Guideline]
+    GLActions --> DeleteGL[Delete Guideline]
+    GLActions --> BackDash1[Back to Dashboard]
+    
+    EditGL --> AllGLCard
+    DeleteGL --> AllGLCard
+    BackDash1 --> Dashboard
+    
+    %% Create New Knowledge Base Path
+    B2 --> KBType{Select Knowledge Base Type}
+    KBType -->|Book Level| BookLevel[Book Level Creation]
+    KBType -->|Study Level| StudyLevelPath[Study Level Path]
+    
+    %% Book Level Path
+    BookLevel --> OrgApp[Organization: Auto-filled<br/>App Details: Select from Dropdown]
+    OrgApp --> BasicInfo[Basic Information:<br/>Book Name & KB Name]
+    BasicInfo --> Validations{Name Validations}
+    
+    Validations -->|Valid| Upload[Upload Documents & Cover Image]
+    Validations -->|Invalid| Reject[Show Error]
+    Reject --> BasicInfo
+    
+    Upload --> ProcSettings[Processing Settings Configuration]
+    ProcSettings --> Retrieval{Select Retrieval Strategy}
+    
+    Retrieval -->|MMR| MMRConfig[MMR Configuration]
+    Retrieval -->|Similarity| SimConfig[Similarity Configuration]
+    Retrieval -->|Hybrid| HybridConfig[Hybrid Configuration]
+    
+    MMRConfig --> MMRModels[Embedding Models:<br/>text-embedding-ada-002<br/>text-embedding-3-large]
+    SimConfig --> SimModels[Embedding Models:<br/>all-MiniLM-L6-v2]
+    HybridConfig --> HybridModels[Embedding Models:<br/>All three available]
+    
+    MMRModels --> CommonSettings[Common Processing Settings<br/>K Value: 1-8 Default: 5<br/>Chunk Size: 20, 100, 250, 500, 1000<br/>Overlap: 10, 15, 20, 25, 50%<br/>Chunking Strategy: Paragraph/Recursive<br/>Database Type: FAISS/ChromaDB]
+    SimModels --> CommonSettings
+    HybridModels --> CommonSettings
+    
+    CommonSettings --> CreateBtn[Click Create Knowledge Base]
+    CreateBtn --> Processing[System Processing:<br/>Document Parsing<br/>Chunking<br/>Embedding Generation<br/>Storage]
+    Processing --> SuccessPopup[Success Pop-up:<br/>Knowledge Base Created]
+    SuccessPopup --> OKBtn[Click OK]
+    OKBtn --> ReturnDash[Return to Dashboard]
+    ReturnDash --> KBCard[Knowledge Base Appears<br/>in Knowledge Bases Card]
+    
+    %% Study LO Creation Path
+    B3 --> SelectBook[Select Book from Uploaded Books]
+    SelectBook --> SelectApp[Select App Details]
+    SelectApp --> AgentConfig[Agent Configuration<br/>Retrieval: Default ON<br/>Compliance: Optional<br/>Match Generation: Optional<br/>Assessment: Default ON]
+    AgentConfig --> TagAgentsLO[Tag Agents Option<br/>For customers without Study LOs]
+    TagAgentsLO --> UploadLO[Upload Study LO Document<br/>CSV Format]
+    UploadLO --> SubmitLO[Click Submit]
+    SubmitLO --> LOProcessing[Study LO Processing & Storage]
+    LOProcessing --> LOReturn[Return to Dashboard]
+    LOReturn --> Dashboard
+    
+    %% Study Level Path
+    StudyLevelPath --> SLSelectBook[Select Book]
+    SLSelectBook --> SLSelectStudy[Select Study from<br/>Uploaded Study LOs]
+    SLSelectStudy --> SLUpload[Upload Study-Specific Documents]
+    SLUpload --> ProcSettings
+    
+    %% Knowledge Base Actions
+    KBCard --> Actions{Knowledge Base Actions}
+    
+    Actions --> A1Edit[Edit Knowledge Base]
+    Actions --> A2Guidelines[Add Guidelines]
+    Actions --> A3Chat[Chat with Document]
+    Actions --> A4TagAgents[Tag Agents]
+    Actions --> A5Delete[Delete Knowledge Base]
+    
+    %% Edit Knowledge Base
+    A1Edit --> EditOptions[Edit Options]
+    EditOptions --> EditProcSettings[Modify Processing Settings]
+    EditOptions --> AddDocs[Add Additional Documents<br/>PDF, TXT, etc]
+    EditOptions --> ChangeCover[Change Cover Image]
+    
+    EditProcSettings --> SaveEdit[Save Changes]
+    AddDocs --> SaveEdit
+    ChangeCover --> SaveEdit
+    SaveEdit --> ReturnDash
+    
+    %% Tag Agents
+    A4TagAgents --> TagAgentConfig[Configure Agent Settings<br/>For customers without Study LOs]
+    TagAgentConfig --> ReturnDash
+    
+    %% Add Guidelines
+    A2Guidelines --> GuidelinesOptions{New Guideline or<br/>General Guideline?}
+    
+    GuidelinesOptions -->|General Guideline| ShowGeneralGL[Display General Guidelines Card]
+    GuidelinesOptions -->|New Guideline| NewGLForm[KB-Specific Guideline Form]
+    
+    %% General Guideline Selection
+    ShowGeneralGL --> GLList[View General Guidelines List<br/>Shows Guideline Name]
+    GLList --> SelectGL[Select Guidelines to Tag]
+    SelectGL --> PreviewGL{Preview Guideline?}
+    PreviewGL -->|Yes| EyeIcon[Click Eye Icon to Preview]
+    PreviewGL -->|No| TagSelectedBtn[Click Tag Selected Guidelines]
+    EyeIcon --> TagSelectedBtn
+    TagSelectedBtn --> GLTagged[Guidelines Tagged to KB]
+    GLTagged --> ReturnDash
+    
+    %% New KB-Specific Guideline
+    NewGLForm --> NewGLType[Select Guideline Type]
+    NewGLType --> NewGLSubtype{Select Guideline Subtype?<br/>Optional}
+    NewGLSubtype -->|Yes| NewAutoName[Subtype Auto-fills Name]
+    NewGLSubtype -->|No| NewCustomName[Enter Custom Name]
+    
+    NewAutoName --> NewGLContent[Add Guideline Content]
+    NewCustomName --> NewGLContent
+    
+    NewGLContent --> NewContentType{Content Type}
+    NewContentType -->|Type Text| NewTypeText[Enter Text Content]
+    NewContentType -->|Upload File| NewUploadFile[Upload TXT or PDF<br/>MAX 5MB]
+    
+    NewTypeText --> SaveNewGL[Save KB-Specific Guideline]
+    NewUploadFile --> SaveNewGL
+    SaveNewGL --> ReturnDash
+    
+    %% AIG Integration
+    KBCard --> AIG[Advanced Item Generator AIG]
+    AIG --> QuestionGen[Question Generation<br/>Based on Knowledge Bases]
+    QuestionGen --> End([End: Questions Generated])
+    
+    A3Chat --> End
+    A5Delete --> Dashboard
+    
+    %% Styling
+    classDef startend fill:#e3f2fd,stroke:#2196f3,stroke-width:3px
+    classDef action fill:#c8e6c9,stroke:#4caf50,stroke-width:2px
+    classDef process fill:#fff9c4,stroke:#ffeb3b,stroke-width:2px
+    classDef decision fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    classDef config fill:#e1bee7,stroke:#9c27b0,stroke-width:2px
+    
+    class Start,End startend
+    class B1,B2,B3,CreateBtn,OKBtn,SubmitLO,A1Edit,A2Guidelines,A3Chat,A4TagAgents,A5Delete,UploadGLBtn,TagSelectedBtn action
+    class AILevate,Sidebar,Dashboard,Processing,SuccessPopup,LOProcessing,QuestionGen,AllGLCard,GLTagged process
+    class Cards,KBType,Validations,Retrieval,Actions,GuidelinesOptions,GLSubtype,ContentType,PreviewGL,NewGLSubtype,NewContentType decision
+    class OrgApp,BasicInfo,ProcSettings,MMRConfig,SimConfig,HybridConfig,CommonSettings,AgentConfig,GuidelinePage,GLType,GLContent,EditOptions,TagAgentConfig config
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Detailed Workflow Explanation</h2>
+            
+            <h3>Phase 1: Initial Setup & Navigation</h3>
+            <ol>
+                <li><strong>User Login:</strong> User logs into the system</li>
+                <li><strong>Navigate to AI Levate Apps:</strong> User accesses the AI Levate application</li>
+                <li><strong>Knowledge Base Icon:</strong> User clicks on the Knowledge Base icon in the left sidebar</li>
+                <li><strong>Dashboard:</strong> Knowledge Base Dashboard loads with three main options</li>
+            </ol>
+            
+            <h3>Phase 2: Create New Guidelines (General Guidelines)</h3>
+            <ol>
+                <li><strong>Click Create New Guidelines:</strong> Opens the Add New Guideline page for General Guidelines</li>
+                <li><strong>Select Guideline Type:</strong> Choose from Guideline Type dropdown</li>
+                <li><strong>Select Guideline Subtype (Optional):</strong>
+                    <ul>
+                        <li>If selected, the subtype value auto-fills as the Guideline Name</li>
+                        <li>If not selected, enter a custom name in the Guideline Name field</li>
+                    </ul>
+                </li>
+                <li><strong>Add Content:</strong> Either type text in "Guideline to Follow" field OR upload TXT/PDF file (MAX 5MB)</li>
+                <li><strong>Upload Guideline:</strong> Click "Upload Guideline" button</li>
+                <li><strong>View in All Guidelines Card:</strong> Uploaded general guidelines appear in the All Guidelines card</li>
+                <li><strong>Manage Guidelines:</strong> User can Edit or Delete general guidelines from this card</li>
+            </ol>
+            
+            <h3>Phase 3: Book Level Knowledge Base Creation</h3>
+            <ol>
+                <li>Select "Book Level" as knowledge base type</li>
+                <li>System auto-fills organization based on login</li>
+                <li>User selects App Details from dropdown</li>
+                <li>Enter Book Name and Knowledge Base Name (with validations)</li>
+                <li>Upload documents and optional cover image</li>
+                <li>Configure processing settings:
+                    <ul>
+                        <li>Retrieval Strategy (MMR, Similarity, or Hybrid)</li>
+                        <li>k value (1-8, default 5)</li>
+                        <li>Chunk Size: 20, 100, 250, 500, 1000</li>
+                        <li>Overlap Percentage: 10, 15, 20, 25, 50%</li>
+                        <li>Chunking Strategy (Paragraph or Recursive)</li>
+                        <li>Database Type (FAISS or ChromaDB)</li>
+                        <li>Embedding Model (availability depends on retrieval strategy)</li>
+                    </ul>
+                </li>
+                <li>Click "Create Knowledge Base" and confirm success</li>
+            </ol>
+            
+            <h3>Phase 4: Study LO Creation</h3>
+            <ol>
+                <li>Click "Create Study LO" from dashboard</li>
+                <li>Select book from uploaded books</li>
+                <li>Select App Details</li>
+                <li>Configure agents (Retrieval and Assessment are default ON)</li>
+                <li><strong>Tag Agents Option:</strong> Available for customers who don't require Study LOs</li>
+                <li>Upload Study LO document in CSV format</li>
+                <li>Submit for processing</li>
+            </ol>
+            
+            <h3>Phase 5: Study Level Knowledge Base Creation</h3>
+            <ol>
+                <li>Select "Study Level" when creating new knowledge base</li>
+                <li>Select book from uploaded books</li>
+                <li>Select specific study from uploaded Study LOs</li>
+                <li>Upload study-specific documents</li>
+                <li>Configure processing settings (same as Book Level - connects to Processing Settings Configuration)</li>
+                <li>Create the Study Level knowledge base</li>
+            </ol>
+            
+            <h3>Phase 6: Knowledge Base Management</h3>
+            <p>Each knowledge base has the following action buttons:</p>
+            
+            <h4>1. Edit Knowledge Base</h4>
+            <ul>
+                <li><strong>Modify Processing Settings:</strong> Change previously selected configuration options</li>
+                <li><strong>Add Additional Documents:</strong> Upload new PDF or other document types</li>
+                <li><strong>Change Cover Image:</strong> Replace the existing cover image with a new one</li>
+                <li>All changes are saved and the KB is updated accordingly</li>
+            </ul>
+            
+            <h4>2. Add Guidelines</h4>
+            <p>User can choose between two options:</p>
+            
+            <p><strong>Option A: General Guideline (Tag Existing)</strong></p>
+            <ul>
+                <li>Display General Guidelines Card showing previously created general guidelines</li>
+                <li>View guideline names in the list</li>
+                <li>Select guidelines to tag to the KB</li>
+                <li>Preview guidelines by clicking the eye icon</li>
+                <li>Click "Tag Selected Guidelines" to apply them to the specific KB</li>
+            </ul>
+            
+            <p><strong>Option B: New Guideline (KB-Specific)</strong></p>
+            <ul>
+                <li>Opens same form as "Create New Guidelines" but for KB-specific guidelines</li>
+                <li>Select Guideline Type from dropdown</li>
+                <li>Optionally select Guideline Subtype (auto-fills name) or enter custom name</li>
+                <li>Add content by typing text or uploading TXT/PDF (MAX 5MB)</li>
+                <li>These guidelines are specific to this knowledge base only (not general guidelines)</li>
+            </ul>
+            
+            <h4>3. Chat with Document</h4>
+            <ul>
+                <li>Query the knowledge base using natural language</li>
+                <li>Get responses based on the indexed content</li>
+            </ul>
+            
+            <h4>4. Tag Agents</h4>
+            <ul>
+                <li>Configure agent settings for the knowledge base</li>
+                <li>Particularly useful for customers who don't require Study LOs</li>
+                <li>Provides flexibility for different customer requirements</li>
+            </ul>
+            
+            <h4>5. Delete Knowledge Base</h4>
+            <ul>
+                <li>Permanently remove the knowledge base</li>
+                <li>This action cannot be undone</li>
+            </ul>
+            
+            <h3>Phase 7: AIG Integration</h3>
+            <ol>
+                <li>Navigate to Advanced Item Generator (AIG) application</li>
+                <li>System uses created knowledge bases for question generation</li>
+                <li>Generate questions based on the indexed content</li>
+            </ol>
+        </div>
+        
+        <div class="section">
+            <h2>Key Decision Points</h2>
+            
+            <h3>1. Knowledge Base Type Selection</h3>
+            <p><strong>Book Level:</strong> First-time creation, comprehensive content management for entire books</p>
+            <p><strong>Study Level:</strong> Requires existing Book Level KB and Study LOs, focused on specific study materials</p>
+            
+            <h3>2. Retrieval Strategy Choice</h3>
+            <table style="width:100%; border-collapse: collapse; margin: 15px 0;">
+                <tr style="background: #2c5f8d; color: white;">
+                    <th>Strategy</th>
+                    <th>Best For</th>
+                    <th>Embedding Models</th>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>MMR</td>
+                    <td>Diverse, non-redundant information retrieval</td>
+                    <td>text-embedding-ada-002<br>text-embedding-3-large</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                    <td>Similarity</td>
+                    <td>Direct, precise matching</td>
+                    <td>all-MiniLM-L6-v2</td>
+                </tr>
+                <tr>
+                    <td>Hybrid</td>
+                    <td>Balanced approach combining multiple strategies</td>
+                    <td>All three models available</td>
+                </tr>
+            </table>
+            
+            <h3>3. Guidelines Types</h3>
+            <p><strong>General Guidelines:</strong> Created via "Create New Guidelines" button, can be tagged to any knowledge base, stored in All Guidelines card, reusable across multiple KBs</p>
+            <p><strong>KB-Specific Guidelines:</strong> Created when adding guidelines to a specific KB via "New Guideline" option, tied to that particular knowledge base only</p>
+            
+            <h3>4. Agent Configuration</h3>
+            <p><strong>In Study LO Creation:</strong> Tightly coupled - AI must require Study LOs and agent configuration</p>
+            <p><strong>Tag Agents Action:</strong> For customers who don't require Study LOs, provides flexibility to configure agents separately</p>
+        </div>
+        
+        <div class="note">
+            <strong>Important Notes:</strong>
+            <ul>
+                <li>Study Level knowledge bases require existing Book Level KB and Study LOs</li>
+                <li>Name validations apply to both Book Name and Knowledge Base Name</li>
+                <li>Embedding model availability depends on the selected retrieval strategy</li>
+                <li>Deleting a knowledge base is permanent and cannot be undone</li>
+                <li>General guidelines can be reused across multiple knowledge bases</li>
+                <li>KB-specific guidelines are tied to individual knowledge bases</li>
+                <li>Maximum file size for guideline documents is 5MB</li>
+                <li>Supported guideline file formats: TXT and PDF</li>
+                <li>Users can edit existing KBs to modify settings, add documents, or change cover images</li>
+                <li>Tag Agents option provides flexibility for customers without Study LO requirements</li>
+            </ul>
+        </div>
+        
+    </div>
+
+    </div>
+
+    <script>
+        (function () {
+            if (window.mermaid && typeof window.mermaid.initialize === 'function') {
+                window.mermaid.initialize({
+                    startOnLoad: false,
+                    theme: 'default',
+                    flowchart: {
+                        useMaxWidth: true,
+                        htmlLabels: true,
+                        curve: 'basis',
+                        rankSpacing: 80,
+                        nodeSpacing: 50
+                    }
+                });
+            }
+
+            async function renderFlowchart() {
+                try {
+                    if (!window.mermaid) return;
+                    var nodes = document.querySelectorAll('#flowchart-view .mermaid');
+                    if (!nodes || nodes.length === 0) return;
+                    if (typeof window.mermaid.run === 'function') {
+                        await window.mermaid.run({ nodes: nodes });
+                    }
+                } catch (e) {
+                    // If Mermaid reports a syntax error, keep the raw text visible.
+                }
+            }
+
+            function setView(view) {
+                if (view === 'flow') {
+                    document.body.classList.remove('view-doc');
+                    document.body.classList.add('view-flow');
+                    var btnD = document.getElementById('toggle-doc');
+                    var btnF = document.getElementById('toggle-flow');
+                    if (btnD) btnD.classList.remove('active');
+                    if (btnF) btnF.classList.add('active');
+                    try { localStorage.setItem('kb_manual_view', 'flow'); } catch (e) {}
+
+                    renderFlowchart();
+                    return;
+                }
+
+                document.body.classList.remove('view-flow');
+                document.body.classList.add('view-doc');
+                var btnD2 = document.getElementById('toggle-doc');
+                var btnF2 = document.getElementById('toggle-flow');
+                if (btnD2) btnD2.classList.add('active');
+                if (btnF2) btnF2.classList.remove('active');
+                try { localStorage.setItem('kb_manual_view', 'doc'); } catch (e) {}
+            }
+
+            document.body.classList.add('view-doc');
+
+            var toggleDoc = document.getElementById('toggle-doc');
+            var toggleFlow = document.getElementById('toggle-flow');
+            if (toggleDoc) toggleDoc.addEventListener('click', function () { setView('doc'); });
+            if (toggleFlow) toggleFlow.addEventListener('click', function () { setView('flow'); });
+
+            try {
+                var saved = localStorage.getItem('kb_manual_view');
+                if (saved === 'flow') setView('flow');
+            } catch (e) {}
+
+            // Render immediately if the default view is Flowchart.
+            if (document.body.classList.contains('view-flow')) {
+                renderFlowchart();
+            }
+        })();
+    </script>
+
+</body>
+</html>
